@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
   codeHighlightContainer: {
     borderRadius: 3,
     paddingHorizontal: 4,
+
   },
   getStartedText: {
     fontSize: 17,
@@ -75,5 +76,6 @@ const styles = StyleSheet.create({
   },
   helpLinkText: {
     textAlign: 'center',
+
   },
 });

@@ -16,8 +16,10 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
+import FruitDetails from '../screens/FruitDetails';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import { Feather } from '@expo/vector-icons'; 
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -66,20 +68,17 @@ function BottomTabNavigator() {
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Inicio',
+          tabBarIcon: ({ color }) => <Feather name="home" size={24} color={Colors[colorScheme].text} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
+            <Feather name="shopping-cart" size={25}
                 color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
+                style={{ marginRight: 15 }}/>
             </Pressable>
           ),
         })}
@@ -88,10 +87,31 @@ function BottomTabNavigator() {
         name="TabTwo"
         component={TabTwoScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Configurações',
+          tabBarIcon: ({ color }) => <Feather name="settings" size={24} color={Colors[colorScheme].text} />,
         }}
       />
+
+      <BottomTab.Screen
+        name="FruitDetails"
+        component={FruitDetails}
+        options={({ navigation }: RootTabScreenProps<'FruitDetails'>) => ({
+          tabBarStyle: { display: "none" },
+          tabBarIcon: ({ color }) => <Feather name="database" size={24} color={Colors[colorScheme].text} />,
+           headerLeft: () => (
+            <Pressable
+              onPress={() => navigation.navigate('TabOne')}
+              style={({ pressed }) => ({
+              opacity: pressed ? 0.5 : 1,
+              })}>
+            <Feather name="arrow-left" size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginLeft: 15 }}/>
+            </Pressable>
+          ),
+        })}
+      />
+
     </BottomTab.Navigator>
   );
 }
